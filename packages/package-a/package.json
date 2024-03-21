@@ -1,0 +1,28 @@
+{
+    "name": "@abcdefpackage/package-a",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "echo": "echo package-a"
+    },
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "typings": "./dist/src/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "devDependencies": {
+        "typescript": "^5.2.2",
+        "vite": "^5.1.6"
+    }
+}

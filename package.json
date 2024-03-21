@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "name": "yarn_workspace_sandbox",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "root:vite": "vite"
+    },
+    "workspaces": [
+        "packages/*"
+    ],
+    "packageManager": "yarn@4.1.1",
+    "devDependencies": {
+        "@types/node": "^20.11.30",
+        "typescript": "^5.4.2",
+        "vite": "^5.1.6",
+        "vite-plugin-dts": "^3.7.3"
+    }
+}
