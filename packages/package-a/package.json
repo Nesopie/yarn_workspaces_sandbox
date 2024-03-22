@@ -1,10 +1,11 @@
 {
     "name": "@abcdefpackage/package-a",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "start:dev": "vite build --watch",
         "preview": "vite preview",
         "echo": "echo package-a"
     },

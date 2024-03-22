@@ -5,13 +5,18 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "root:vite": "vite"
+        "echo": "yarn workspaces foreach --include \"packages/*\" run echo",
+        "changeset": "changeset",
+        "build": "yarn workspaces foreach -Atp --include \"packages/*\" run build",
+        "start:dev": "yarn workspaces foreach -Ap --include \"packages/*\" run start:dev",
+        "patch:affected": "yarn workspaces foreach -Ap --include \"packages/*\" --since=$0 exec yarn version patch"
     },
     "workspaces": [
         "packages/*"
     ],
     "packageManager": "yarn@4.1.1",
     "devDependencies": {
+        "@changesets/cli": "^2.27.1",
         "@types/node": "^20.11.30",
         "typescript": "^5.4.2",
         "vite": "^5.1.6",

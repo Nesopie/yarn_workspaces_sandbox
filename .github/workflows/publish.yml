@@ -1,0 +1,36 @@
+name: Node.js Package
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-and-publish-npm:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  registry-url: https://registry.npmjs.org/
+            - name: install dependencies
+              run: |
+                  npm install -g yarn
+                  yarn
+            - name: check changeset file
+              id: check-changeset
+              run: yarn changeset status --since=main
+              continue-on-error: true
+            - name: build
+              id: build
+              run: |
+                  yarn build
+            - name: Patch
+              if: steps.check-changeset.outcome != 'success'
+              run: echo 'FAILRUE'
+            - name: Update Versions
+              if: steps.check-change-set.outcome == 'success'
+              run: echo 'SUCCESS'
