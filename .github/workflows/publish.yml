@@ -16,6 +16,8 @@ jobs:
               with:
                   node-version: 18
                   registry-url: https://registry.npmjs.org/
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.npm_token}}
             - name: Set SHAs
               uses: nrwl/nx-set-shas@v4
             - name: install dependencies
@@ -25,7 +27,6 @@ jobs:
             - name: check changeset file
               id: check-changeset
               run: |
-
                   if [ $(ls .changeset | wc -l) -eq 2 ]; then
                     exit 1
                   else
@@ -36,11 +37,18 @@ jobs:
               id: build
               run: |
                   yarn build
-            - name: Versioning and publish
+            - name: Versioning and publish (patch)
               if: steps.check-changeset.outcome != 'success'
               run: |
                   yarn run patch:affected ${{ env.NX_BASE }}
                   yarn run publish:affected
-            - name: Update Versions
+            - name: Versioning and publish
               if: steps.check-change-set.outcome == 'success'
-              run: echo 'SUCCESS'
+              uses: changesets/action@v1
+              with:
+                  version: yarn changeset version
+                  commit: "chore: update versions"
+                  title: "chore: update versions"
+                  publish: yarn publish:affected
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
