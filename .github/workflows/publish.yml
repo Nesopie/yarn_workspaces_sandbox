@@ -19,9 +19,10 @@ jobs:
               env:
                   NODE_AUTH_TOKEN: ${{secrets.npm_token}}
             - name: Set SHAs
-              id: set-shas
-              run: echo "PREVIOUS_VERSIONING=$(git log --all --grep='Version packages' | awk 'NR==1 {print $2}')" >> "$GITHUB_OUTPUT"
               uses: nrwl/nx-set-shas@v4
+            - name: Set Previous Version sha
+              id: set-sha
+              run: echo "PREVIOUS_VERSIONING=$(git log --all --grep='Version packages' | awk 'NR==1 {print $2}')" >> "$GITHUB_OUTPUT"
             - name: install dependencies
               run: |
                   npm install -g yarn
@@ -42,7 +43,7 @@ jobs:
             - name: Versioning and Publish (patch)
               if: steps.check-changeset.outcome != 'success'
               run: |
-                  yarn run patch:affected ${{ steps.set-shas.outputs.PREVIOUS_VERSIONING || env.NX_BASE }}
+                  yarn run patch:affected ${{ steps.set-sha.outputs.PREVIOUS_VERSIONING || env.NX_BASE }}
             - name: Versioning and Publish
               if: steps.check-changeset.outcome == 'success'
               run: |
