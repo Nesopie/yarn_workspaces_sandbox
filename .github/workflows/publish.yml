@@ -45,7 +45,6 @@ jobs:
             - name: Versioning and publish
               if: steps.check-changeset.outcome == 'success'
               run: |
-                  echo $NODE_AUTH_TOKEN
                   yarn changeset version
                   git config user.email "<email>"
                   git config user.name "<name>"
