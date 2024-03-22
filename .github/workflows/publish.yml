@@ -18,8 +18,8 @@ jobs:
                   registry-url: https://registry.npmjs.org/
               env:
                   NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-            # - name: Set SHAs
-            #   uses: nrwl/nx-set-shas@v4
+            - name: Set SHAs
+              uses: nrwl/nx-set-shas@v4
             - name: install dependencies
               run: |
                   npm install -g yarn
@@ -44,11 +44,13 @@ jobs:
                   yarn run publish:affected
             - name: Versioning and publish
               if: steps.check-changeset.outcome == 'success'
-              uses: changesets/action@v1
-              with:
-                  version: yarn changeset version
-                  commit: "chore: update versions"
-                  title: "chore: update versions"
-                  publish: yarn publish:affected
+              run: |
+                  yarn changeset version
+                  git config user.email "<email>"
+                  git config user.name "<name>"
+                  git add -A
+                  git commit -m "Version packages"
+                  yarn changeset publish
+                  git push origin main
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
