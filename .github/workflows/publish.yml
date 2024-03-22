@@ -37,16 +37,20 @@ jobs:
               id: build
               run: |
                   yarn build
-            - name: Versioning (patch)
+            - name: Versioning and Publish (patch)
               if: steps.check-changeset.outcome != 'success'
               run: |
                   yarn run patch:affected ${{ env.NX_BASE }}
-            - name: Versioning
+                  git config user.email "<email>"
+                  git config user.name "<name>"
+                  git add -A
+                  git commit -m "Version packages"
+                  yarn run publish:affected
+                  git push origin main
+            - name: Versioning and Publish
               if: steps.check-changeset.outcome == 'success'
               run: |
                   yarn changeset version
-            - name: Publish
-              run: |
                   git config user.email "<email>"
                   git config user.name "<name>"
                   git add -A
