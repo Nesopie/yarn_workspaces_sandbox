@@ -1,5 +1,16 @@
 # @abcdefpackage/package-b
 
+## 1.2.0
+
+### Minor Changes
+
+- 1acf11f: fjdklsj
+
+### Patch Changes
+
+- Updated dependencies [1acf11f]
+  - @abcdefpackage/package-a@3.0.0
+
 ## 1.1.0
 
 ### Minor Changes
