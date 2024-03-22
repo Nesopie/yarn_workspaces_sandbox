@@ -1,4 +1,4 @@
 import { a } from "@abcdefpackage/package-a";
-import { b } from "@abcdefpackage/package-a";
+import { c } from "@abcdefpackage/package-b";
 
-export const d = "c" + b + a;
+export const d = "c" + c + a;
