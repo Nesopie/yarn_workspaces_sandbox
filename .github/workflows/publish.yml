@@ -40,7 +40,8 @@ jobs:
             - name: Versioning and Publish (patch)
               if: steps.check-changeset.outcome != 'success'
               run: |
-                  yarn run patch:affected ${{ git log --all --grep='Version packages' | awk 'NR==1 {print $2}' || env.NX_BASE }}
+                  export PREVIOUS_VERSIONING=$(git log --all --grep='Version packages' | awk 'NR==1 {print $2}')
+                  yarn run patch:affected ${{ $PREVIOUS_VERSIONING || env.NX_BASE }}
             - name: Versioning and Publish
               if: steps.check-changeset.outcome == 'success'
               run: |
