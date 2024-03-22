@@ -1,5 +1,16 @@
 # @abcdefpackage/package-b
 
+## 1.1.0
+
+### Minor Changes
+
+- 6752bf8: ljf
+
+### Patch Changes
+
+- Updated dependencies [6752bf8]
+  - @abcdefpackage/package-a@2.0.0
+
 ## 1.0.0
 
 ### Major Changes

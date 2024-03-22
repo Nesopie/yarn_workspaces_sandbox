@@ -1,5 +1,14 @@
 # @abcdefpackage/package-c
 
+## 0.0.16
+
+### Patch Changes
+
+- 6752bf8: ljf
+- Updated dependencies [6752bf8]
+  - @abcdefpackage/package-a@2.0.0
+  - @abcdefpackage/package-b@1.1.0
+
 ## 0.0.7
 
 ### Patch Changes
