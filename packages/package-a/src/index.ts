@@ -1,2 +1,2 @@
 export const a = "a";
-export const b = "ba";
+export const b = "b";
