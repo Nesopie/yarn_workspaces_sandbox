@@ -1,5 +1,16 @@
 # @abcdefpackage/package-b
 
+## 1.3.0
+
+### Minor Changes
+
+- 5ecee6a: htjkrejdl
+
+### Patch Changes
+
+- Updated dependencies [5ecee6a]
+  - @abcdefpackage/package-a@4.0.0
+
 ## 1.2.0
 
 ### Minor Changes

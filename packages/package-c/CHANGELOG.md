@@ -1,5 +1,14 @@
 # @abcdefpackage/package-c
 
+## 0.0.18
+
+### Patch Changes
+
+- 5ecee6a: htjkrejdl
+- Updated dependencies [5ecee6a]
+  - @abcdefpackage/package-a@4.0.0
+  - @abcdefpackage/package-b@1.3.0
+
 ## 0.0.17
 
 ### Patch Changes
