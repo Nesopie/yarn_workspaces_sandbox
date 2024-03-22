@@ -16,6 +16,8 @@ jobs:
               with:
                   node-version: 18
                   registry-url: https://registry.npmjs.org/
+            - name: Set SHAs
+              uses: nrwl/nx-set-shas@v4
             - name: install dependencies
               run: |
                   npm install -g yarn
@@ -30,7 +32,9 @@ jobs:
                   yarn build
             - name: Patch
               if: steps.check-changeset.outcome != 'success'
-              run: echo 'FAILRUE'
+              run: |
+                  yarn run patch:affected ${{ env.NX_BASE }}
+
             - name: Update Versions
               if: steps.check-change-set.outcome == 'success'
               run: echo 'SUCCESS'

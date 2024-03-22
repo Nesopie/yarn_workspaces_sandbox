@@ -9,7 +9,8 @@
         "changeset": "changeset",
         "build": "yarn workspaces foreach -Atp --include \"packages/*\" run build",
         "start:dev": "yarn workspaces foreach -Ap --include \"packages/*\" run start:dev",
-        "patch:affected": "yarn workspaces foreach -Ap --include \"packages/*\" --since=$0 exec yarn version patch"
+        "patch:affected": "yarn workspaces foreach -pt --include \"packages/*\" --since=$0 exec yarn version patch",
+        "publish:affected": "yarn workspaces foreach -p --include \"packages/*\" --since=main npm publish"
     },
     "workspaces": [
         "packages/*"
