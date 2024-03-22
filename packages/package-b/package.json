@@ -1,6 +1,6 @@
 {
     "name": "@abcdefpackage/package-b",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "type": "module",
     "dependencies": {
         "@abcdefpackage/package-a": "workspace:^"
