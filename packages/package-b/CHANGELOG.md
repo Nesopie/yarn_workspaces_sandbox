@@ -1,5 +1,11 @@
 # @abcdefpackage/package-b
 
+## 1.0.0
+
+### Major Changes
+
+- e5a876f: jfk;ldsaj
+
 ## 0.1.1
 
 ### Patch Changes

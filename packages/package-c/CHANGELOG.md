@@ -1,5 +1,12 @@
 # @abcdefpackage/package-c
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [e5a876f]
+  - @abcdefpackage/package-b@1.0.0
+
 ## 0.0.2
 
 ### Patch Changes
