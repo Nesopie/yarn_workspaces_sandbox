@@ -24,7 +24,13 @@ jobs:
                   yarn
             - name: check changeset file
               id: check-changeset
-              run: yarn changeset status --since=main
+              run: |
+
+                  if [ $(ls .changeset | wc -l) -eq 2 ]; then
+                    exit 1
+                  else
+                    exit 0
+                  fi
               continue-on-error: true
             - name: build
               id: build
