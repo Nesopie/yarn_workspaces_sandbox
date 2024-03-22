@@ -42,6 +42,7 @@ jobs:
               run: |
                   export PREVIOUS_VERSIONING=$(git log --all --grep='Version packages' | awk 'NR==1 {print $2}')
                   echo $PREVIOUS_VERSIONING
+                  echo $env.NX_BASE
                   yarn run patch:affected ${{ env.PREVIOUS_VERSIONING || env.NX_BASE }}
             - name: Versioning and Publish
               if: steps.check-changeset.outcome == 'success'
