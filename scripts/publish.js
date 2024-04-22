@@ -17,7 +17,7 @@ const compareVersions = (version1, version2) => {
         }
     }
     
-    return 0; // Versions are equal
+    return 0;
 }
 
 const SCOPE = "@abcdefpackage";
@@ -29,8 +29,8 @@ const currentVersion = require(`../packages/${package}/package.json`).version;
 
 const isCurrentVersionGreater = compareVersions(currentVersion, publishedVersion) > 0;
 
-console.log("update packages", isCurrentVersionGreater)
 
 if(isCurrentVersionGreater) {
+    console.log(`Publishing package ${SCOPE}/${package} ${publishedVersion} => ${currentVersion}`);
     execSync(`yarn workspace ${SCOPE}/${package} npm publish`);
 }
