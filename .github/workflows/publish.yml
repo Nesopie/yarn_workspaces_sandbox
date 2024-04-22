@@ -52,4 +52,4 @@ jobs:
                 title: 'Add '
                 body: 'This updates the versions of the packages'
                 labels: automated pr
-                branch: ci:version-packages
+                branch: ci/version-packages
