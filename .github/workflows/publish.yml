@@ -20,7 +20,7 @@ jobs:
                   NODE_AUTH_TOKEN: ${{secrets.npm_token}}
             - name: install dependencies
               run: |
-                  npm install -g yarn
+                  corepack enable
                   yarn
             - name: check changeset file
               id: check-changeset
@@ -44,6 +44,12 @@ jobs:
                   yarn run publish:affected
                   git config user.email "<email>"
                   git config user.name "<name>"
-                  git add -A
-                  git commit -m "Version packages"
-                  git push origin main
+            - name: Versioning PR
+                if: steps.check-changeset.outcome == 'success'
+              uses: peter-evans/create-pull-request@v6
+              with:
+                commit-message: Version packages
+                title: 'Add '
+                body: 'This updates the versions of the packages'
+                labels: automated pr
+                branch: ci:version-packages
