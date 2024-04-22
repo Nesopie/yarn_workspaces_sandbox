@@ -45,7 +45,7 @@ jobs:
                   git config user.email "<email>"
                   git config user.name "<name>"
             - name: Versioning PR
-                if: steps.check-changeset.outcome == 'success'
+              if: steps.check-changeset.outcome == 'success'
               uses: peter-evans/create-pull-request@v6
               with:
                 commit-message: Version packages
