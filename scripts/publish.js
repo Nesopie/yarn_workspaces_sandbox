@@ -1,0 +1,36 @@
+const { execSync } = require("child_process");
+
+const compareVersions = (version1, version2) => {
+    const v1Components = version1.split('.');
+    const v2Components = version2.split('.');
+    
+    const maxLength = Math.max(v1Components.length, v2Components.length);
+    
+    for (let i = 0; i < maxLength; i++) {
+        const v1Value = parseInt(v1Components[i]) || 0;
+        const v2Value = parseInt(v2Components[i]) || 0;
+        
+        if (v1Value < v2Value) {
+            return -1;
+        } else if (v1Value > v2Value) {
+            return 1;
+        }
+    }
+    
+    return 0; // Versions are equal
+}
+
+const SCOPE = "@abcdefpackage";
+
+const package = process.argv[2];
+
+const publishedVersion = JSON.parse(Buffer.from(execSync(`yarn npm info ${SCOPE}/${package} --json`), "hex"))["dist-tags"]['latest'];
+const currentVersion = require(`../packages/${package}/package.json`).version;
+
+const isCurrentVersionGreater = compareVersions(currentVersion, publishedVersion) > 0;
+
+console.log("update packages", isCurrentVersionGreater)
+
+if(isCurrentVersionGreater) {
+    execSync(`yarn workspace ${SCOPE}/${package} npm publish`);
+}

@@ -22,34 +22,10 @@ jobs:
               run: |
                   corepack enable
                   yarn
-            - name: check changeset file
-              id: check-changeset
-              run: |
-                  if [ $(ls .changeset | wc -l) -eq 2 ]; then
-                    exit 1
-                  else
-                    exit 0
-                  fi
-              continue-on-error: true
-            - name: build
-              id: build
-              run: |
-                  yarn build
-            - name: Versioning and Publish
-              if: steps.check-changeset.outcome == 'success'
-              run: |
-                  yarn changeset version
+            - name: Build
+              run: yarn build
             - name: Publish
-              run: |
-                  yarn run publish:affected
-                  git config user.email "<email>"
-                  git config user.name "<name>"
-            - name: Versioning PR
-              if: steps.check-changeset.outcome == 'success'
-              uses: peter-evans/create-pull-request@v6
-              with:
-                commit-message: Version packages
-                title: 'Update package versions'
-                body: 'Updates the versions of the packages'
-                labels: automated pr
-                branch: ci/version-packages
+              run: | 
+                  for package in packages/*; do
+                      node scripts/publish.js "${package##*/}"
+                  done
